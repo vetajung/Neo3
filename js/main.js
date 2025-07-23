@@ -3,7 +3,7 @@ let storyStepIndex = 0;
 
 // 스토리 단계 정의
 const storySteps = [
-  { text: "${playerName} 은 파트장님에게 첫 업무를 배정받았다.", type: "text" },
+  { text: "나는 파트장님에게 첫 업무를 배정받았다.", type: "text" },
   { text: "내용은 거래처에 지난 회의자료를 전달하고, 일정 관련 확인 요청을 하는 간단한 업무.", type: "text" },
   { text: "파트장님은 편한 방식으로 해봐요 라고만 했다", type: "text" },
   {
