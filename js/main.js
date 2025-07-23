@@ -1,66 +1,71 @@
-const storySteps = [
+let storyData = [];
+let currentIndex = 1;
+let playerName = '';
+let playerStarted = false;
+
+// ✅ 엑셀에서 뽑은 JSON 형태의 데이터 예시 삽입
+// 실제로는 JSON 파일로 따로 관리해도 좋습니다.
+storyData = [
   {
-    id: 1,
-    type: "story",
-    text: "${playerName}의 첫 출근날이다.\n회사까지는 자율출퇴근제를 시행하고 있어 자유롭게 출근이 가능하다.",
-    image: "버스배경.jpg",
-    next: 2
+    index: 1,
+    image: '버스배경.jpg',
+    text: '오늘은 첫 출근날이다.\n회사까지는 자율출퇴근제를 시행하고 있어 자유롭게 출근이 가능하다.',
+    buttons: [{ text: '다음', nextIndex: 2 }]
   },
   {
-    id: 2,
-    type: "choice",
-    question: "언제까지 가는게 좋을까?",
-    options: [
-      { label: "8시 정각 즈음 출근한다", next: 3 },
-      { label: "9시 30분에 출근한다", next: 9 }
+    index: 2,
+    text: '언제까지 가는게 좋을까?',
+    buttons: [
+      { text: '8시 정각 즈음 출근한다', nextIndex: 3 },
+      { text: '9시 30분에 출근한다', nextIndex: 9 }
     ]
   },
-  // 📌 여기에 계속 엑셀 기반으로 index별로 이어 붙이면 됩니다.
   {
-    id: 15,
-    type: "end",
-    text: "첫 출근 미션 종료! 잘했어요!",
-    image: "",
-    next: null
-  }
+    index: 3,
+    image: '사무실배경.jpg',
+    text: '회사에 도착하니 아직 사무실엔 몇몇 프로님들만 자리에 앉아 조용히 업무를 시작한다.',
+    buttons: [{ text: '다음', nextIndex: 4 }]
+  },
+  // ... (다른 인덱스도 동일하게 추가)
 ];
 
-let currentStepId = 1;
-let playerName = "";
+function startGame() {
+  const nameInput = document.getElementById('name-input');
+  playerName = nameInput.value.trim();
+  if (!playerName) {
+    alert('이름을 입력해주세요!');
+    return;
+  }
 
-$(document).ready(function () {
-  $("#start-btn").click(function () {
-    playerName = $("#name-input").val() || "신입사원";
-    $("#intro").hide();
-    $("#story").show();
-    showStory(currentStepId);
-  });
-});
+  playerStarted = true;
+  document.getElementById('intro').style.display = 'none';
+  document.getElementById('story').style.display = 'block';
 
-function showStory(id) {
-  const step = storySteps.find(s => s.id === id);
-  if (!step) return;
+  showStory(currentIndex);
+}
 
-  const text = (step.text || step.question || "").replace(/\$\{playerName\}/g, playerName);
-  $("#story-text").text(text);
+function showStory(index) {
+  const story = storyData.find(s => s.index === index);
+  if (!story) return;
 
-  if (step.image) {
-    $("#story-image").attr("src", step.image).show();
+  currentIndex = index;
+  const storyText = story.text.replace(/@@@/g, playerName);
+  document.getElementById('story-text').innerText = storyText;
+
+  if (story.image) {
+    document.getElementById('story-image').src = `./assets/${story.image}`;
+    document.getElementById('story-image').style.display = 'block';
   } else {
-    $("#story-image").hide();
+    document.getElementById('story-image').style.display = 'none';
   }
 
-  $("#story-buttons").empty();
+  const buttonsContainer = document.getElementById('story-buttons');
+  buttonsContainer.innerHTML = '';
 
-  if (step.type === "story") {
-    $("#story-buttons").append(`<button onclick="showStory(${step.next})">다음</button>`);
-  } else if (step.type === "choice") {
-    step.options.forEach(opt => {
-      $("#story-buttons").append(`<button onclick="showStory(${opt.next})">${opt.label}</button>`);
-    });
-  } else if (step.type === "end") {
-    $("#story-buttons").append(`<button onclick="location.reload()">처음부터</button>`);
-  }
-
-  currentStepId = id;
+  story.buttons.forEach(btn => {
+    const button = document.createElement('button');
+    button.innerText = btn.text;
+    button.onclick = () => showStory(btn.nextIndex);
+    buttonsContainer.appendChild(button);
+  });
 }
