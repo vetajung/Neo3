@@ -69,3 +69,9 @@ function showStory(index) {
     buttonsContainer.appendChild(button);
   });
 }
+
+$(document).ready(function () {
+  $('#start-button').on('click', function () {
+    startStory();
+  });
+});
