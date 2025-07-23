@@ -170,5 +170,31 @@ margin: 6px 0;
     font-size: 0.9em;
     font-family: 'Gowun Dodum', sans-serif;
   }
+
+[정은영 (Ag0)] Change Agent / 상품화품질그룹(CS) / 삼성전자 2025-07-23 11:04
+/* style.css 하단에 추가 (팝업 스타일) */
+#choice-popup {
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  border: 2px solid #84cfff;
+  border-radius: 16px;
+  padding: 20px;
+  width: 80%;
+  max-width: 400px;
+  z-index: 9999;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+#choice-popup img {
+  width: 100%;
+}
+
+#choice-popup p {
+  font-size: 1em;
+  color: #444;
+}
   
   
