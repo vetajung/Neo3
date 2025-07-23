@@ -3,20 +3,20 @@ let storyStepIndex = 0;
 
 // 스토리 단계 정의
 const storySteps = [
-  { text: "평소 궁금했던걸 물어볼 기회다.", type: "text" },
+  { text: "오늘은 첫 출근날입니다. 회사까지는 자율출퇴근제를 시행하고 있어 자유롭게 출근이 가능하다.", type: "text" },
   { text: "이런 기회 흔치않다!", type: "text" },
   {
     type: "choice",
-    question: "무엇을 물어보는게 좋을까?",
+    question: "언제까지 가는게 좋을까.. 마주치는 부서분들에게는 인사를 꼭 해야겠어!",
     options: [
       {
-        label: "회사생활 조언",
-        text: "현명하군요!",
+        label: "8시 정각즈음 출근한다",
+        text: "성실하시군요!",
         nextStep: 3
       },
       {
-        label: "퇴근 후 일상",
-        text: "바보군요",
+        label: " 9시 30분에 출근한다",
+        text: "부서의 출근시간이 있는지 확인한 후 출근하면 더 베스트!",
         nextStep: 4
       },
       {
