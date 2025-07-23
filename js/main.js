@@ -1,99 +1,105 @@
 let playerName = '';
-let currentStep = 0;
+let storyStepIndex = 0;
 
-// 스토리 진행 정의
+// 스토리 단계 정의
 const storySteps = [
-  { text: () => `평소 궁금했던 걸 물어볼 기회다.`, next: 'story' },
-  { text: () => `이런 기회 흔치 않다`, next: 'story' },
+  { text: "평소 궁금했던걸 물어볼 기회다.", type: "text" },
+  { text: "이런 기회 흔치않다!", type: "text" },
   {
-    type: 'choice',
-    question: '무엇을 물어보는 게 좋을까?',
+    type: "choice",
+    question: "무엇을 물어보는게 좋을까?",
     options: [
-      { label: '회사생활 조언', text: '현명하군요!', image: 'https://via.placeholder.com/300', nextStep: 3 },
-      { label: '퇴근 후 일상', text: '바보군요', image: 'https://via.placeholder.com/300', nextStep: 4 },
-      { label: '회사 분위기/문화', text: '천재군요', image: 'https://via.placeholder.com/300', nextStep: 5 }
+      {
+        label: "회사생활 조언",
+        text: "현명하군요!",
+        nextStep: 3
+      },
+      {
+        label: "퇴근 후 일상",
+        text: "바보군요",
+        nextStep: 4
+      },
+      {
+        label: "회사 분위기/문화",
+        text: "천재군요",
+        nextStep: 5
+      }
     ]
   },
-  { text: () => `내일 궁금했던 걸 물어볼 기회다.`, next: 'story' },
-  { text: () => `이런 기회 흔치 않다!!`, next: 'story' },
+  { text: "내일 궁금했던걸 물어볼 기회다.", type: "text" },
+  { text: "이런 기회 흔치않다!!", type: "text" },
   {
-    type: 'choice',
-    question: '뭐 먹을까?',
+    type: "choice",
+    question: "뭐 먹을까?",
     options: [
-      { label: '김치찌개', text: '김치!', image: 'https://via.placeholder.com/300', nextStep: 6 },
-      { label: '된장', text: '된!', image: 'https://via.placeholder.com/300', nextStep: 6 },
-      { label: '고추장', text: '도추장!', image: 'https://via.placeholder.com/300', nextStep: 6 }
+      {
+        label: "김치찌개",
+        text: "김치!",
+        nextStep: 6
+      },
+      {
+        label: "된장",
+        text: "된!",
+        nextStep: 6
+      },
+      {
+        label: "고추장",
+        text: "도추장!",
+        nextStep: 6
+      }
     ]
   },
-  { text: () => `오늘도 출근 완료!`, next: 'end' }
+  { text: "점심시간 끝! 다시 업무 시작!", type: "text" },
 ];
 
 function startGame() {
-  const name = document.getElementById('username').value.trim();
-  if (!name) return alert('이름을 입력하세요.');
-  playerName = name;
+  const nameInput = document.getElementById('username').value.trim();
+  if (!nameInput) return alert('이름을 입력하세요.');
+  playerName = nameInput;
+
   document.getElementById('intro').style.display = 'none';
-  proceedStep();
-}
+  document.getElementById('story').style.display = 'block';
 
-function proceedStep() {
-  const step = storySteps[currentStep];
-
-  // 모든 화면 숨기기
-  document.getElementById('story').style.display = 'none';
-  document.getElementById('choice-container').style.display = 'none';
-  document.getElementById('choice-popup').style.display = 'none';
-  document.getElementById('ending').style.display = 'none';
-
-  if (step.type === 'choice') {
-    showChoice(step);
-  } else if (step.next === 'story') {
-    document.getElementById('story-text').textContent = step.text();
-    document.getElementById('story').style.display = 'block';
-  } else if (step.next === 'end') {
-    document.getElementById('ending').style.display = 'block';
-    document.getElementById('ending-text').textContent = `감사합니다, ${playerName}님!`;
-  }
+  storyStepIndex = 0;
+  nextStory(); // 첫 스토리 실행
 }
 
 function nextStory() {
-  currentStep++;
-  proceedStep();
+  const currentStep = storySteps[storyStepIndex];
+
+  if (!currentStep) return;
+
+  // 텍스트 단계
+  if (currentStep.type === "text") {
+    document.getElementById("choice-container").style.display = "none";
+    document.getElementById("story").style.display = "block";
+    document.getElementById("story-text").textContent = currentStep.text;
+    storyStepIndex++;
+  }
+
+  // 선택지 단계
+  else if (currentStep.type === "choice") {
+    document.getElementById("story").style.display = "none";
+    showChoiceStep(currentStep);
+  }
 }
 
-function showChoice(step) {
-  document.getElementById('choice-question').textContent = step.question;
-  const btns = document.getElementById('choice-buttons');
-  btns.innerHTML = '';
+function showChoiceStep(step) {
+  const q = document.getElementById("choice-question");
+  const btns = document.getElementById("choice-buttons");
 
-  step.options.forEach((opt, idx) => {
-    const btn = document.createElement('button');
+  document.getElementById("choice-container").style.display = "block";
+  q.textContent = step.question;
+  btns.innerHTML = "";
+
+  step.options.forEach(opt => {
+    const btn = document.createElement("button");
     btn.textContent = opt.label;
     btn.onclick = () => {
-      selectedOption = opt;
-      showChoicePopup(opt);
+      alert(opt.text);
+      storyStepIndex = opt.nextStep;
+      nextStory();
     };
     btns.appendChild(btn);
   });
-
-  document.getElementById('choice-container').style.display = 'block';
-}
-
-let selectedOption = null;
-
-function showChoicePopup(option) {
-  document.getElementById('choice-popup-image').src = option.image;
-  document.getElementById('choice-popup-text').textContent = option.text;
-  document.getElementById('choice-popup').style.display = 'block';
-  document.getElementById('choice-container').style.display = 'none';
-}
-
-function proceedAfterChoice() {
-  currentStep = selectedOption.nextStep;
-  selectedOption = null;
-  proceedStep();
-}
-
-function resetGame() {
-  location.reload();
 }
