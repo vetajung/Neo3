@@ -84,4 +84,48 @@ const puzzles = [
     }
   }
 
+
+// 선택형 문제 데이터
+const choices = [
+  {
+    question: "오늘 점심 메뉴로 어떤 걸 먹을까요?",
+    options: ["김치찌개", "제육볶음", "비빔밥"]
+  },
+  {
+    question: "사무실에 처음 들어가면 누구에게 먼저 인사할까요?",
+    options: ["경비 아저씨", "팀장님", "자판기"]
+  }
+];
+
+// 선택형 인덱스 추적
+let currentChoiceIndex = 0;
+
+function showChoice(index) {
+  const choice = choices[index];
+  if (!choice) {
+    nextMove(); // 선택형 질문이 끝났으면 퍼즐로
+    return;
+  }
+
+  // 화면 전환
+  document.getElementById('move-container').style.display = 'none';
+  document.getElementById('puzzle-container').style.display = 'none';
+  document.getElementById('choice-container').style.display = 'block';
+
+  document.getElementById('choice-question').textContent = choice.question;
+
+  const buttonContainer = document.getElementById('choice-buttons');
+  buttonContainer.innerHTML = '';
+
+  choice.options.forEach(option => {
+    const btn = document.createElement('button');
+    btn.textContent = option;
+    btn.onclick = () => {
+      currentChoiceIndex++;
+      document.getElementById('choice-container').style.display = 'none';
+      nextMove(); // 다음 퍼즐 or 이동으로
+    };
+    buttonContainer.appendChild(btn);
+  });
+}
   
