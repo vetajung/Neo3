@@ -88,12 +88,12 @@ const puzzles = [
 // 선택형 문제 데이터
 const choices = [
   {
-    question: "오늘 점심 메뉴로 어떤 걸 먹을까요?",
-    options: ["김치찌개", "제육볶음", "비빔밥"]
+    question: "어디랑 같이 먹는 게 좋을까…",
+    options: ["부서원과 같이 먹는다", "동기와 같이 먹는다"]
   },
   {
-    question: "사무실에 처음 들어가면 누구에게 먼저 인사할까요?",
-    options: ["경비 아저씨", "팀장님", "자판기"]
+    question: "이런 기회 흔치 않다. 뭘 물어보는 게 좋을까?",
+    options: ["선배에게 회사생활에 대한 조언을 구한다", "선배의 퇴근 후 일상을 물어본다", "회사 분위기나 문화를 물어본다"]
   }
 ];
 
@@ -130,24 +130,24 @@ function showChoice(index) {
 }
 
 const choiceScenario = {
-  question: "오늘 점심 뭐 먹을래요?",
+  question: "이런 기회 흔치 않다. 뭘 물어보는 게 좋을까?",
   options: [
     {
-      label: "김치찌개",
+      label: "선배에게 회사생활에 대한 조언을 구한다",
       image: "https://cdn.imweb.me/upload/S20221006593a99a9a642f/297a0e2c4ec77.png",
-      text: "따뜻하고 얼큰한 김치찌개! 역시 한국인의 소울푸드!",
+      text: "회사생활 조언을 구하다니 현명 그 자체",
       nextPuzzleIndex: 1
     },
     {
-      label: "제육볶음",
+      label: "선배의 퇴근 후 일상을 물어본다",
       image: "https://img.seoul.co.kr//img/upload/2023/09/07/SSI_20230907145921.jpg",
-      text: "매콤달콤한 제육볶음으로 스트레스 해소 완료!",
+      text: "귀엽군",
       nextPuzzleIndex: 2
     },
     {
-      label: "비빔밥",
+      label: "회사 분위기나 문화를 물어본다",
       image: "https://recipe1.ezmember.co.kr/cache/recipe/2016/07/03/358ecf82331fc8e55b9611e99971f53f1.jpg",
-      text: "다채로운 맛의 비빔밥! 영양 만점이에요~",
+      text: "바보바보",
       nextPuzzleIndex: 3
     }
   ]
