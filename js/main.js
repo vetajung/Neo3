@@ -1,4 +1,4 @@
-let playerName = '';
+let playerName = username;
 let storyStepIndex = 0;
 
 // 스토리 단계 정의
