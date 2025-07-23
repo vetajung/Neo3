@@ -3,8 +3,8 @@ let currentStep = 0;
 
 // 스토리 진행 정의
 const storySteps = [
-  //{ text: () => `평소 궁금했던 걸 물어볼 기회다.`, next: 'story' },
-  //{ text: () => `이런 기회 흔치 않다`, next: 'story' },
+  { text: () => `평소 궁금했던 걸 물어볼 기회다.`, next: 'story' },
+  { text: () => `이런 기회 흔치 않다`, next: 'story' },
   {
     type: 'choice',
     question: '무엇을 물어보는 게 좋을까?',
