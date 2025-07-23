@@ -64,6 +64,6 @@ function showStory(index) {
 
 $(document).ready(function () {
   $('#start-button').on('click', function () {
-    startStory();
+    startGame();
   });
 });
