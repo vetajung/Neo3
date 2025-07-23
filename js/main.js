@@ -65,10 +65,11 @@ function resetGame() {
     location.reload();
   }
 
+const choicePoints = [0, 2]; // 0번, 2번에서 선택지 표시
 
 function showMove(index) {
-  if (index === 0) {
-    showChoice(currentChoiceIndex); // 선택형 질문으로 우회
+  if (choicePoints.includes(index)) {
+    showChoiceScenario(); // ← 선택지 보여주는 공통 함수
     return;
   }
 
