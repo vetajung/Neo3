@@ -128,4 +128,28 @@ function showChoice(index) {
     buttonContainer.appendChild(btn);
   });
 }
+
+const choiceScenario = {
+  question: "오늘 점심 뭐 먹을래요?",
+  options: [
+    {
+      label: "김치찌개",
+      image: "https://cdn.imweb.me/upload/S20221006593a99a9a642f/297a0e2c4ec77.png",
+      text: "따뜻하고 얼큰한 김치찌개! 역시 한국인의 소울푸드!",
+      nextPuzzleIndex: 1
+    },
+    {
+      label: "제육볶음",
+      image: "https://img.seoul.co.kr//img/upload/2023/09/07/SSI_20230907145921.jpg",
+      text: "매콤달콤한 제육볶음으로 스트레스 해소 완료!",
+      nextPuzzleIndex: 2
+    },
+    {
+      label: "비빔밥",
+      image: "https://recipe1.ezmember.co.kr/cache/recipe/2016/07/03/358ecf82331fc8e55b9611e99971f53f1.jpg",
+      text: "다채로운 맛의 비빔밥! 영양 만점이에요~",
+      nextPuzzleIndex: 3
+    }
+  ]
+};
   
