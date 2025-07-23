@@ -67,7 +67,7 @@ function resetGame() {
 
 
 function showMove(index) {
-  if (index === 2) {
+  if (index === 0) {
     showChoice(currentChoiceIndex); // 선택형 질문으로 우회
     return;
   }
