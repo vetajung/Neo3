@@ -198,7 +198,44 @@ function saveGameState() {
     }, 1000);
   }
   
-  
+let choiceNextIndex = 0;
+
+function showChoiceScenario() {
+  const container = document.getElementById('choice-container');
+  container.style.display = 'block';
+
+  const q = document.getElementById('choice-question');
+  const btns = document.getElementById('choice-buttons');
+
+  q.textContent = choiceScenario.question;
+  btns.innerHTML = '';
+
+  choiceScenario.options.forEach(option => {
+    const btn = document.createElement('button');
+    btn.textContent = option.label;
+    btn.onclick = () => {
+      showChoicePopup(option);
+    };
+    btns.appendChild(btn);
+  });
+}
+
+function showChoicePopup(option) {
+  choiceNextIndex = option.nextPuzzleIndex;
+  document.getElementById('choice-popup-image').src = option.image;
+  document.getElementById('choice-popup-text').textContent = option.text;
+  document.getElementById('choice-popup').style.display = 'block';
+}
+
+// 팝업 닫고 다음 퍼즐로 넘어감
+function proceedAfterChoice() {
+  document.getElementById('choice-popup').style.display = 'none';
+  document.getElementById('choice-container').style.display = 'none';
+
+  currentPuzzleIndex = choiceNextIndex; // 분기 설정
+  saveGameState();
+  showMove(currentPuzzleIndex); // 또는 showPuzzle(currentPuzzleIndex)
+}
   
   window.onload = function () {
     const result = loadGameState();
