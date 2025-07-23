@@ -51,13 +51,11 @@
     <div id="message-text"></div>
   </div>
 
-  <!-- 선택 결과 팝업 -->
-<div id="choice-popup" style="display:none;">
-  <div id="choice-popup-content">
-    <img id="choice-popup-image" src="" alt="" style="max-width: 100%; border-radius: 12px; margin-bottom: 10px;" />
-    <p id="choice-popup-text"></p>
-    <button onclick="proceedAfterChoice()">다음</button>
-  </div>
+  <!-- 객관식 선택 팝업 -->
+<div id="choice-popup" style="display: none;">
+  <img id="popup-image" src="" alt="결과 이미지" style="width: 80%; border-radius: 12px; margin-top: 20px;" />
+  <p id="popup-text" style="margin-top: 20px; font-size: 1.1em;"></p>
+  <button id="popup-next-button">다음</button>
 </div>
   
   <div id="ending" style="display: none;">
@@ -73,7 +71,14 @@
   <script src="js/main.js"></script>
   <script src="js/puzzle.js"></script>
 
-
+  <!-- 선택 결과 팝업 -->
+<div id="choice-popup" style="display:none;">
+  <div id="choice-popup-content">
+    <img id="choice-popup-image" src="" alt="" style="max-width: 100%; border-radius: 12px; margin-bottom: 10px;" />
+    <p id="choice-popup-text"></p>
+    <button onclick="proceedAfterChoice()">다음</button>
+  </div>
+</div>
 
 </body>
 </html>
