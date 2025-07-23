@@ -67,10 +67,15 @@ function resetGame() {
 
 
 function showMove(index) {
-    document.getElementById('move-container').style.display = 'block';
-    document.getElementById('puzzle-container').style.display = 'none';
-    loadMove(shuffled[index]);
+  if (index === 2) {
+    showChoice(currentChoiceIndex); // 선택형 질문으로 우회
+    return;
   }
+
+  document.getElementById('move-container').style.display = 'block';
+  document.getElementById('puzzle-container').style.display = 'none';
+  loadMove(shuffled[index]);
+}
 
 function showPuzzle(index) {
   document.querySelectorAll('.puzzle').forEach(p => p.style.display = 'none');
