@@ -1,88 +1,155 @@
 const puzzles = [
-  {
-    move: '오늘 점심 뭐 먹을까요?',
-    moveImage: 'https://example.com/lunch.jpg',
-    choices: [
-      {
-        text: '라면',
-        image: 'https://example.com/ramen.jpg',
-        result: '너무 짜서 탈락!',
-        nextIndex: 1
-      },
-      {
-        text: '비빔밥',
-        image: 'https://example.com/bibimbap.jpg',
-        result: '완벽한 선택이에요!',
-        nextIndex: 2
-      },
-      {
-        text: '피자',
-        image: 'https://example.com/pizza.jpg',
-        result: '배달이 너무 느림..',
-        nextIndex: 2
+    {
+      move: `내 자리 어디에 떨어져있는건 아니겠지?? ` ,
+      moveImage: `https://m.tsfurniture.co.kr/web/product/big/202407/5d4bf51673821a13732320b936a0c98a.jpg`,
+      question: '자리문제 1234?',
+      answer: '1234',
+      hints: ['네 자리 숫자입니다.', '1로 시작합니다.']
+    },
+    {
+      move: `설마 어제 그룹장님 자리에서 뭐 말씀드리다가 두고왔나?` ,
+      moveImage: `https://cdn.koit.co.kr/news/photo/202411/126963_79771_1827.jpg`,
+      question: '그룹장님문제 동쪽?',
+      answer: '동쪽',
+      hints: ['해가 뜨는 쪽입니다.', '왼쪽이 아닙니다.']
+    },
+    {
+      move: '어제 새로 생긴 시작실에 시료도 옮겨뒀는데.. 설마 거기에?' ,
+      moveImage: `https://www.hyundai.co.kr/image/upload/asset_library/MDA00000000000054162/de88a9de0c014d6f902cd9b776201618.jpg`,
+      question: '시작실 열쇠?',
+      answer: '열쇠',
+      hints: ['잠긴 것을 여는 도구입니다.', '쇠로 만들어졌습니다.']
+    },
+    {
+      move: '아참, 어제 휴게실에서 책도 한권 빌려갔었어' ,
+      moveImage: `https://thumbnail9.coupangcdn.com/thumbnails/remote/492x492ex/image/vendor_inventory/d206/c6ba369cada786ff11d185ad4324288dfaa46bc7eef880718cb46a73e6c3.jpg`,
+      question: '휴게실 홍길동?',
+      answer: '홍길동',
+      hints: ['고전 소설 속 인물입니다.', '이름에 "동"이 들어갑니다.']
+    },
+    {
+      move: '프린터기에서 복사도 한번 했었는데...' ,
+      moveImage: `https://cdn.kbanker.co.kr/news/photo/202002/89167_37060_36.jpg`,
+      question: '프린터기 방탈출?',
+      answer: '방탈출',
+      hints: ['방에서 빠져나가는 게임입니다.', '네 글자입니다.']
+    }
+  ];
+  
+  let hintShown = 0;
+
+  function loadMove(index) {
+    const puzzle = puzzles[index];
+    hintShown = 0;
+    document.getElementById('move-text').textContent = puzzle.move;
+    document.getElementById('move-image').src = puzzle.moveImage;
+  }
+  
+  function loadPuzzle(index) {
+    const puzzle = puzzles[index];
+    hintShown = 0;
+    document.getElementById('question').textContent = puzzle.question;
+    document.getElementById('user-answer').value = '';
+    document.getElementById('hint-box').textContent = '';
+    document.getElementById('hint-button').disabled = false;
+  }
+  
+  function checkAnswer() {
+    const userInput = document.getElementById('user-answer').value.trim();
+    const puzzle = puzzles[shuffled[currentPuzzleIndex]];
+    if (userInput === puzzle.answer) {
+        showMessage("🎉 정답입니다! 🎉", true, () => {
+            nextMove(); // 2초 후 실행
+          });
+
+      } else {
+        showMessage(`❌ 틀렸습니다 ❌\n다시 시도해보세요.`, false);
       }
-    ]
+  }
+  
+  function showHint() {
+    const puzzle = puzzles[shuffled[currentPuzzleIndex]];
+    const hintBox = document.getElementById('hint-box');
+    if (hintShown < puzzle.hints.length) {
+      const newHint = document.createElement('p');
+      newHint.textContent = `힌트 ${hintShown + 1}: ${puzzle.hints[hintShown]}`;
+      hintBox.appendChild(newHint);
+      
+      hintShown++;
+      totalHintCount++;
+      saveGameState(); // ✅ 힌트 사용 후 저장
+      if (hintShown >= puzzle.hints.length) {
+        document.getElementById('hint-button').disabled = true;
+      }
+    }
+  }
+
+
+// 선택형 문제 데이터
+const choices = [
+  {
+    question: "오늘 점심 메뉴로 어떤 걸 먹을까요?",
+    options: ["김치찌개", "제육볶음", "비빔밥"]
   },
   {
-    move: '커피를 마시고 싶다면 어떤 걸?',
-    moveImage: 'https://example.com/coffee.jpg',
-    choices: [
-      {
-        text: '아메리카노',
-        image: 'https://example.com/americano.jpg',
-        result: '쓴 맛이 최고죠!',
-        nextIndex: 2
-      },
-      {
-        text: '라떼',
-        image: 'https://example.com/latte.jpg',
-        result: '부드럽고 따뜻해요.',
-        nextIndex: 2
-      },
-      {
-        text: '모카',
-        image: 'https://example.com/mocha.jpg',
-        result: '달달한 기분~',
-        nextIndex: 2
-      }
-    ]
-  },
-  {
-    move: '오늘 하루도 수고했어요! 게임 끝!',
-    moveImage: 'https://example.com/end.jpg',
-    choices: []
+    question: "사무실에 처음 들어가면 누구에게 먼저 인사할까요?",
+    options: ["경비 아저씨", "팀장님", "자판기"]
   }
 ];
 
-function loadPuzzle(index) {
-  const puzzle = puzzles[index];
-  document.getElementById('move-text').textContent = puzzle.move;
-  document.getElementById('move-image').src = puzzle.moveImage;
-  const choices = document.getElementById('choice-buttons');
-  choices.innerHTML = '';
+// 선택형 인덱스 추적
+let currentChoiceIndex = 0;
 
-  if (puzzle.choices.length === 0) {
-    choices.innerHTML = '<p>게임이 종료되었습니다.</p>';
+function showChoice(index) {
+  const choice = choices[index];
+  if (!choice) {
+    nextMove(); // 선택형 질문이 끝났으면 퍼즐로
     return;
   }
 
-  puzzle.choices.forEach(choice => {
+  // 화면 전환
+  document.getElementById('move-container').style.display = 'none';
+  document.getElementById('puzzle-container').style.display = 'none';
+  document.getElementById('choice-container').style.display = 'block';
+
+  document.getElementById('choice-question').textContent = choice.question;
+
+  const buttonContainer = document.getElementById('choice-buttons');
+  buttonContainer.innerHTML = '';
+
+  choice.options.forEach(option => {
     const btn = document.createElement('button');
-    btn.textContent = choice.text;
-    btn.onclick = () => showResult(choice);
-    choices.appendChild(btn);
+    btn.textContent = option;
+    btn.onclick = () => {
+      currentChoiceIndex++;
+      document.getElementById('choice-container').style.display = 'none';
+      nextMove(); // 다음 퍼즐 or 이동으로
+    };
+    buttonContainer.appendChild(btn);
   });
 }
 
-function showResult(choice) {
-  document.getElementById('popup-image').src = choice.image;
-  document.getElementById('popup-text').textContent = choice.result;
-  document.getElementById('choice-popup').style.display = 'block';
-
-  document.getElementById('popup-next-button').onclick = () => {
-    document.getElementById('choice-popup').style.display = 'none';
-    loadPuzzle(choice.nextIndex);
-  };
-}
-
-window.onload = () => loadPuzzle(0);
+const choiceScenario = {
+  question: "오늘 점심 뭐 먹을래요?",
+  options: [
+    {
+      label: "김치찌개",
+      image: "https://cdn.imweb.me/upload/S20221006593a99a9a642f/297a0e2c4ec77.png",
+      text: "따뜻하고 얼큰한 김치찌개! 역시 한국인의 소울푸드!",
+      nextPuzzleIndex: 1
+    },
+    {
+      label: "제육볶음",
+      image: "https://img.seoul.co.kr//img/upload/2023/09/07/SSI_20230907145921.jpg",
+      text: "매콤달콤한 제육볶음으로 스트레스 해소 완료!",
+      nextPuzzleIndex: 2
+    },
+    {
+      label: "비빔밥",
+      image: "https://recipe1.ezmember.co.kr/cache/recipe/2016/07/03/358ecf82331fc8e55b9611e99971f53f1.jpg",
+      text: "다채로운 맛의 비빔밥! 영양 만점이에요~",
+      nextPuzzleIndex: 3
+    }
+  ]
+};
+  
