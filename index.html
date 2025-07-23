@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>신입사원 첫출근</title>
+  <title>신출시</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -18,51 +18,5 @@
   </section>
 
   <script src="main.js"></script>
-</body>
-</html>index.html
-
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>방탈출 게임</title>
-  <link rel="stylesheet" href="css/style.css" />
-</head>
-<body>
-  <div id="intro">
-    <h1>오늘은 사무실 첫 출근날!</h1>
-    <p>당신의 이름은?</p>
-    <input id="username" type="text" placeholder="이름 입력" />
-    <button onclick="startGame()">게임 시작</button>
-  </div>
-
-  <!-- 스토리 화면 -->
-  <div id="story" style="display: none;">
-    <div id="story-text"></div>
-    <button onclick="nextStory()">다음</button>
-  </div>
-
-  <!-- 객관식 선택 화면 -->
-  <div id="choice-container" style="display: none;">
-    <h2 id="choice-question"></h2>
-    <div id="choice-buttons"></div>
-  </div>
-
-  <!-- 팝업 -->
-  <div id="choice-popup" style="display: none;">
-    <img id="choice-popup-image" src="" alt="" />
-    <p id="choice-popup-text"></p>
-    <button onclick="proceedAfterChoice()">다음</button>
-  </div>
-
-  <!-- 엔딩 화면 -->
-  <div id="ending" style="display: none;">
-    <h2>게임 종료</h2>
-    <div id="ending-text"></div>
-    <button onclick="resetGame()">게임 초기화</button>
-  </div>
-
-  <script src="js/main.js"></script>
 </body>
 </html>
