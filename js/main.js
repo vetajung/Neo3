@@ -3,7 +3,7 @@ let storyStepIndex = 0;
 
 // 스토리 단계 정의
 const storySteps = [
-  { text: "오늘은 첫 출근날입니다. 회사까지는 자율출퇴근제를 시행하고 있어 자유롭게 출근이 가능하다.", type: "text" },
+  { text: "오늘은 ${playerName}님의 첫 출근날입니다. 회사까지는 자율출퇴근제를 시행하고 있어 자유롭게 출근이 가능하다.", type: "text" },
   { text: "이런 기회 흔치않다!", type: "text" },
   {
     type: "choice",
