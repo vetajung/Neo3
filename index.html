@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>방탈출 게임</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+  <div id="intro">
+    <h1>오늘은 사무실 첫 출근날!</h1>
+    <p>당신의 이름은?</p>
+    <input id="username" type="text" placeholder="이름 입력" />
+    <button onclick="startGame()">게임 시작</button>
+    <!-- <button onclick="resetGame()" style="margin-top: 10px; background: #eee;">게임 초기화</button> -->
+  </div>
+
+  <!-- 인트로 스토리화면 -->
+  <div id="story" style="display: none;">
+    <div id="story-text"></div>
+    <button onclick="showStory()">다음</button>
+  </div>
+
+  <!-- 이동 화면 -->
+  <div id="move-container" style="display: none;">
+    <h2 id="move-text"></h2>
+    <img id="move-image" src="" style="max-width: 100%; border-radius: 12px;" />
+    <button onclick="nextPuzzle()">도착했어</button>
+  </div>
+
+  <!-- 문제 화면 -->
+  <div id="puzzle-container" style="display: none;">
+    <h2 id="question">문제</h2>
+    <input id="user-answer" type="text" placeholder="정답 입력" />
+    <div id="buttons">
+      <button onclick="checkAnswer()">제출</button>
+      <button onclick="showHint()">힌트</button>
+    </div>
+    <div id="hint-box"></div>
+  </div>
+
+  <!-- 정답 여부 팝업-->
+  <div id="message-popup" style="display: none;">
+    <div id="message-text"></div>
+  </div>
+
+  
+  <div id="ending" style="display: none;">
+    <h2>어, 혹시 이건가요..?</h2>
+    <div id="ending-text"></div>
+    <div id="copy-section">
+      <button id="copy-button">📋 결과 복사하기</button>
+      <p id="copy-status" style="display:none; color: #4caf50; margin-top: 10px;">복사되었습니다!</p>
+    </div>
+    <button onclick="resetGame()" style="margin-top: 10px; background: #eee;">게임 초기화</button>
+  </div>
+  
+  <script src="js/main.js"></script>
+  <script src="js/puzzle.js"></script>
+
+
+
+</body>
+</html>
