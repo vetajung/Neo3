@@ -30,12 +30,6 @@ storyData = [
 ];
 
 function startGame() {
-  const nameInput = document.getElementById('name-input');
-  playerName = nameInput.value.trim();
-  if (!playerName) {
-    alert('이름을 입력해주세요!');
-    return;
-  }
 
   playerStarted = true;
   document.getElementById('intro').style.display = 'none';
@@ -49,8 +43,6 @@ function showStory(index) {
   if (!story) return;
 
   currentIndex = index;
-  const storyText = story.text.replace(/@@@/g, playerName);
-  document.getElementById('story-text').innerText = storyText;
 
   if (story.image) {
     document.getElementById('story-image').src = `./assets/${story.image}`;
