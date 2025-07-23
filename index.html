@@ -2,24 +2,28 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>첫 출근 시뮬레이션</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-  <section id="intro">
-    <h1>첫 출근 일기</h1>
-    <input type="text" id="name-input" placeholder="이름을 입력하세요" />
-    <button id="start-btn">시작하기</button>
-  </section>
+  <div id="container">
+    <!-- 이름 입력 화면 -->
+    <div id="start-screen">
+      <h1>첫 출근 시뮬레이션</h1>
+      <input type="text" id="username" placeholder="당신의 이름은?" />
+      <button id="start-button">시작하기</button>
+    </div>
 
-  <section id="story" style="display: none;">
-    <img id="story-image" style="display: none;" />
-    <p id="story-text"></p>
-    <div id="story-buttons"></div>
-  </section>
+    <!-- 스토리 화면 -->
+    <div id="story-screen" style="display: none">
+      <div id="story-image"></div>
+      <div id="story-text"></div>
+      <div id="button-container"></div>
+    </div>
+  </div>
 
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-  <script src="js/main.js"></script>
+  <script src="main.js"></script>
 </body>
 </html>
